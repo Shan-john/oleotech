@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {   useState } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaArrowRight, FaRegClock } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -7,9 +7,15 @@ import logobg from "../assets/images/logobg.png";
 import { CiMenuBurger } from "react-icons/ci";
 
 function Headersection() {
+ 
+
+   
+  
   const [isMenuButtonClicked,setMenuButtonState] =useState(false);
   return (
-    <div className="w-full relative ">
+    <div className={`w-full relative transition-transform duration-300  `}
+    
+    >
       <div className="  h-[clamp(10px,5vh,50px)] overflow-hidden  w-full bg-white   flex justify-between items-center       gap-1">
         <div className=" lg:flex sm:flex    justify-start  text-black  pl-[clamp(4px,5vw,0px)] h-[clamp(10px,5vh,50px)]  w-[clamp(100px,50vw,700px)]    hidden sm:block  text-[clamp(0rem,2vw,12px)]">
           {" "}
@@ -31,11 +37,11 @@ function Headersection() {
           </div>
           <div>
             {" "}
-            <a className="md:text-[15px] text-[0.9rem,5vw,10px]">faq</a>
+            <a className="md:text-[15px] text-[0.4rem,5vw,10px]">faq</a>
           </div>
           <div className="h-[35px]  w-[1px] bg-black m-2 md:text-[14px]   "></div>
           <div>
-            <a href="" className="text-[0.9rem,5vw,10px]">
+            <a href="" className="text-[0.4rem,5vw,10px]">
               Support
             </a>
           </div>
@@ -47,7 +53,8 @@ function Headersection() {
         </div>
       </div>
       {/* second header */}
-      <div className="w-full flex items-center bg-white  h-[clamp(20px,18vw,70px)]  justify-between ">
+      <div className={`w-full flex items-center bg-white h-[clamp(20px,18vw,70px)] justify-between transition-transform duration-300 `}
+>
         <div>
           <img
             className="realtive inset-0 md:mt-1    md:pt-0 md:h-[76px]      w-[clamp(20px,70vw,300px)]   h-[clamp(20px,18vw,73px)]   md:top-12 "
@@ -68,11 +75,11 @@ function Headersection() {
               <a class="text-gray-800 font-semibold  ">Home</a>
             </li>
             <li className=" w-auto ">
-              <a className="text-gray-800 font-semibold  bg-yellow-400 ">
+              <a className="text-gray-800 font-semibold   ">
                 AboutUs
               </a>
             </li>
-            <li className=" w-auto bg-red-600">
+            <li className=" w-auto  ">
               <a className="text-gray-800 font-semibold ">Destinations</a>
             </li>
             <li className=" w-auto">
@@ -92,12 +99,12 @@ function Headersection() {
             </li>
           </ul>
         </nav>
-        <div className="bg-blue-700 h-[clamp(30px,30vh,35px)]  flex rounded-50 items-center justify-center w-[clamp(30px,30vw,35px)] block lg:hidden mr-[50px]">
+        <div className="bg-blue-400  h-[clamp(30px,30vh,35px)]   flex rounded-[10px] items-center justify-center w-[clamp(30px,30vw,35px)]   lg:hidden mr-[50px]">
           <CiMenuBurger size={20} onClick={()=>{setMenuButtonState(!isMenuButtonClicked)}} />
         </div>
 
-        <button class=" w-[clamp(25px,30vw,180px)]  mr-[10px] relative flex items-center justify-center  overflow-hidden hidden lg:block  font-semibold text-white rounded-[49px]      h-[clamp(10px,10vw,50px)] bg-gray-800   group">
-          <span class="relative z-10 flex items-center gap-4  text-[clamp(0.6rem,1vw,5px)]">
+        <button class=" w-[clamp(25px,30vw,180px)]  mr-[10px] relative flex items-center justify-center  overflow-hidden  hidden lg:block  font-semibold text-white rounded-[49px]      h-[clamp(10px,10vw,50px)] bg-gray-800   group">
+          <span class="relative z-10 flex items-center gap-4  text-[clamp(0.6rem,1vw,14px)]">
             Request A Quote <FaArrowRight />{" "}
           </span>
           <span class="absolute inset-0 bg-green-500 rounded-r-[50px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-in-out z-0"></span>

@@ -33,7 +33,7 @@ function CarouselSlider() {
           className={`   h-[clamp(400px,90vh,800px)]    overflow-hidden    relative`}
         >
           <img
-            src={images[1]}
+            src={images[currentIndex]}
             alt="carousel"
             className={`absolute inset-0  h-[clamp(400px,90vh,800px)]  object-cover   transition-opacity duration-700 ease-in-out opacity-100 animate-fade-in-${direction}`}
           />
@@ -104,7 +104,7 @@ function CarouselSlider() {
       </div>
  
       {/* Filter Section */}
-      <div className="absolute z-10 bg-white border-green-300 border-2 rounded-[50px] flex flex-wrap md:flex-nowrap items-center justify-around w-[clamp(280px,80vw,1200px)]  md:w-[clamp(480px,60vm,980px)] md:h-[clamp(100px,10vh,100px)] h-[clamp(100px,50vh,350px)]   top-[clamp(87vh,15vh,20px)]  md:top-[clamp(880px,30vh,50px)]     ">
+      <div className="absolute z-10 bg-white border-green-300 border-2 rounded-[50px] flex flex-wrap md:flex-nowrap items-center justify-around w-[clamp(280px,80vw,1200px)]  md:w-[clamp(480px,60vm,980px)] md:h-[clamp(100px,10vh,100px)] h-[clamp(100px,50vh,350px)]   top-[clamp(89vh,15vh,20px)]  md:top-[clamp(880px,30vh,50px)]     ">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-start   pl-1 py-1 gap-0 md:gap-0 over">
           <div className="flex flex-col md:flex-row justify-around  items-center    text-black w-[clamp(280px,80vw,1200px)]  md:w-[clamp(480px,60vm,980px)]  md:h-[clamp(90px,10vh,100px)] h-[clamp(80px,40vh,330px)] px-2     ">
             <div className="flex items-center justify-around w-[clamp(50vw,50vw,300px)]  md:w-[clamp(05vw ,50vw,300px)] gap-2   ">

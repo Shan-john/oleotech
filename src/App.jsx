@@ -5,6 +5,7 @@ import './App.css'
 import Headersection from './Components/Headersection'
 import CarouselSlider from './Components/CarouselSlider'
 import BodySection from './Components/BodySection'
+ 
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,6 +16,7 @@ function App() {
         <Headersection/>
         <CarouselSlider/>
         <BodySection/>
+       
         </div>
     </>
   )
