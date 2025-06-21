@@ -7,9 +7,20 @@ import webdesignimage from "../assets/images/webdesign.png";
 import webdevelopmentimage from "../assets/images/webdevelopment.png";
 import softwaredevelopmentimage from "../assets/images/softwaredevelopment.png";
 function BodySection() {
-   
+  const handleGmailRedirect = () => {
+    const email = "0leotechsolution@gmail.com";
+    const subject = "Let's Connect!";
+    const body = "Hi there, I'd like to know more about your services.";
+  
+    const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+      email
+    )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  
+    window.open(gmailURL, "_blank"); // opens in new tab
+  };
+  
   return (
-    <div className=" bg-gradient-to-b from-green-50 mb-20 overflow-hidden  to-transparent flex flex-col  items-center  ">
+    <div  className="  bg-gradient-to-b from-green-50 mb-20 overflow-hidden  to-transparent flex flex-col  items-center  ">
       <div className="w-full flex flex-wrap md:pt-[120px] pt-[110px] justify-center items-center gap-[clamp(20px,5vw,50px)] px-6 py-10">
         {/* Project Done */}
         <div className="bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-blue-500/50 hover:shadow-2xl hover:border-2 hover:border-blue-300 cursor-pointer relative overflow-hidden group">
@@ -39,12 +50,12 @@ function BodySection() {
         </div>
       </div>
 
-      <div className=" md:pt-[100px] pt-[210px] text-center">
+      <div id="body-section" className=" md:pt-[100px] pt-[210px] text-center">
         <h3 className="text-xl text-green-950 font-[cursive]">
           Wonderful Place For You
         </h3>
         <h1 className="text-6xl font-bold text-green-900">Tour Categories</h1>
-      </div>
+      </div> 
 
       <div className=" lg:mt-10 mt-5 flex items-center justify-center ">
         <div className="  pl-[clamp(0px,5vw,70px)] w-auto pr-[clamp(0px,5vw,70px)] xl:flex items-center justify-around lg:gap-40">
@@ -75,118 +86,32 @@ function BodySection() {
               trusted partner in building smart, secure, and future-ready
               digital solutions.
             </p>
-            <button className="text-white w-[clamp(12,5vw,60px)] h-[clamp(5px,5vh,50px)] font-[cursive] ">
+            <button  onClick={handleGmailRedirect}   className="text-white w-[clamp(12,5vw,60px)] h-[clamp(5px,5vh,50px)] font-[cursive] ">
               Enquiry
             </button>
           </div>
         </div>
       </div>
-      <div className="flex grid-col-3 xl:flex-cols flex-wrap justify-center items-center gap-[clamp(5px,5vw,59px)] xl:m-[190px] m-[30px] px-4 py-6">
-        {/* Card 1 */}
-        <div className="flex items-center border border-blue-400 rounded-tr-[50px] rounded-br-[50px] bg-white w-[clamp(180px,25vw,250px)] h-[clamp(60px,20vh,100px)]">
-          <div className="flex items-center justify-center h-full w-[clamp(60px,25vw,100px)] border-green-800 border-2 rounded-tr-[50px] rounded-br-[50px] overflow-hidden">
-            <img
-              src={itrainingimage}
-              alt=""
-              className="h-[80%] w-auto object-contain"
-            />
-          </div>
-          <div className="ml-3 text-black">
-            <h1 className="font-bold font-[cursive] text-[clamp(0.6rem,2vw,25px)] leading-tight">
-              450+
-            </h1>
-            <h1 className="font-bold font-[cursive] text-[clamp(0.6rem,2vw,15px)] leading-tight">
-              Development
-            </h1>
-          </div>
-        </div>
-
-        {/* Card 2 */}
-        <div className="flex items-center border border-blue-400 rounded-tr-[50px] rounded-br-[50px] bg-white w-[clamp(180px,25vw,250px)] h-[clamp(60px,20vh,100px)]">
-          <div className="flex items-center justify-center h-full w-[clamp(60px,25vw,100px)] border-green-800 border-2 rounded-tr-[50px] rounded-br-[50px] overflow-hidden">
-            <img
-              src={webdesignimage}
-              alt=""
-              className="h-[80%] w-auto object-contain"
-            />
-          </div>
-          <div className="ml-3 text-black">
-            <h1 className="font-bold font-[cursive] text-[clamp(0.6rem,2vw,25px)] leading-tight">
-              450+
-            </h1>
-            <h1 className="font-bold font-[cursive] text-[clamp(0.6rem,2vw,15px)] leading-tight">
-              Development
-            </h1>
-          </div>
-        </div>
-
-        {/* Card 3 */}
-        <div className="flex items-center border border-blue-400 rounded-tr-[50px] rounded-br-[50px] bg-white w-[clamp(180px,25vw,250px)] h-[clamp(60px,20vh,100px)]">
-          <div className="flex items-center justify-center h-full w-[clamp(60px,25vw,100px)] border-green-800 border-2 rounded-tr-[50px] rounded-br-[50px] overflow-hidden">
-            <img
-              src={webhostingiamge}
-              alt=""
-              className="h-[80%] w-auto object-contain"
-            />
-          </div>
-          <div className="ml-3 text-black">
-            <h1 className="font-bold font-[cursive] text-[clamp(0.6rem,2vw,25px)] leading-tight">
-              450+
-            </h1>
-            <h1 className="font-bold font-[cursive] text-[clamp(0.6rem,2vw,15px)] leading-tight">
-              Development
-            </h1>
-          </div>
-        </div>
-
-        {/* Card 4 */}
-        <div className="flex items-center border border-blue-400 rounded-tr-[50px] rounded-br-[50px] bg-white w-[clamp(180px,25vw,250px)] h-[clamp(60px,20vh,100px)]">
-          <div className="flex items-center justify-center h-full w-[clamp(60px,25vw,100px)] border-green-800 border-2 rounded-tr-[50px] rounded-br-[50px] overflow-hidden">
-            <img
-              src={softwaredevelopmentimage}
-              alt=""
-              className="h-[80%] w-auto object-contain"
-            />
-          </div>
-          <div className="ml-3 text-black">
-            <h1 className="font-bold font-[cursive] text-[clamp(0.6rem,2vw,25px)] leading-tight">
-              450+
-            </h1>
-            <h1 className="font-bold font-[cursive] text-[clamp(0.6rem,2vw,15px)] leading-tight">
-              Development
-            </h1>
-          </div>
-        </div>
-
-        {/* Card 5 */}
-        <div className="flex items-center border border-blue-400 rounded-tr-[50px] rounded-br-[50px] bg-white w-[clamp(180px,25vw,250px)] h-[clamp(60px,20vh,100px)]">
-          <div className="flex items-center justify-center h-full w-[clamp(60px,25vw,100px)] border-green-800 border-2 rounded-tr-[50px] rounded-br-[50px] overflow-hidden">
-            <img
-              src={webdevelopmentimage}
-              alt=""
-              className="h-[80%] w-auto object-contain"
-            />
-          </div>
-          <div className="ml-3 text-black">
-            <h1 className="font-bold font-[cursive] text-[clamp(0.6rem,2vw,25px)] leading-tight">
-              450+
-            </h1>
-            <h1 className="font-bold font-[cursive] text-[clamp(0.6rem,2vw,15px)] leading-tight">
-              Development
-            </h1>
-          </div>
-        </div>
+      
+      {/* Projects Showcase Heading */}
+      <div id="project-Section" className="text-center mt-40 mb-8">
+        
+        <h1 className="text-5xl font-bold text-green-900 mb-4">
+          Showcasing Our Projects
+        </h1>
+         
       </div>
+
       <div>
         <div
           className={`grid grid-cols-1 sm:grid-cols-2 p-7 lg:grid-cols-3 xl:grid-cols-4 gap-[clamp(20px,5vw,40px)] transition-all duration-500 ease-in-out  
            
            `}
         >
-          <div className="group relative overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="group relative p-3 overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gradient-to-tr from-green-800">
             <img
-              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500 group-hover:scale-110"
-              src="https://i.pinimg.com/736x/d4/40/d4/d440d4a13a62c9d9dec50d983410922a.jpg"
+              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500  rounded-[40px]    group-hover:scale-110"
+              src="https://i.pinimg.com/736x/4f/cd/b9/4fcdb9aac6d67376c951a4c68c4f80ee.jpg"
               alt="Gallery Image 1"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -196,42 +121,42 @@ function BodySection() {
             </div>
           </div>
           
-          <div className="group relative overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="group relative p-3 overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gradient-to-tr from-blue-800">
             <img
-              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500 group-hover:scale-110"
-              src="https://i.pinimg.com/736x/91/5c/51/915c51f70c37cc00e9a7ab7b428af4dd.jpg"
-              alt="Gallery Image 2"
+              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500  rounded-[40px]    group-hover:scale-110"
+              src="https://i.pinimg.com/736x/4f/cd/b9/4fcdb9aac6d67376c951a4c68c4f80ee.jpg"
+              alt="Gallery Image 1"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-              <h3 className="font-bold text-lg">Project 2</h3>
-              <p className="text-sm">UI/UX Design</p>
+              <h3 className="font-bold text-lg">Project 1</h3>
+              <p className="text-sm">Web Development</p>
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="group relative p-3 overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gradient-to-tr from-green-800">
             <img
-              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500 group-hover:scale-110"
-              src="https://i.pinimg.com/736x/9c/af/bc/9cafbc1e8d44f0d59a1ed8c67bbaa69e.jpg"
-              alt="Gallery Image 3"
+              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500  rounded-[40px]    group-hover:scale-110"
+              src="https://i.pinimg.com/736x/4f/cd/b9/4fcdb9aac6d67376c951a4c68c4f80ee.jpg"
+              alt="Gallery Image 1"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-              <h3 className="font-bold text-lg">Project 3</h3>
-              <p className="text-sm">Software Development</p>
+              <h3 className="font-bold text-lg">Project 1</h3>
+              <p className="text-sm">Web Development</p>
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="group relative p-3 overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gradient-to-tr from-blue-800">
             <img
-              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500 group-hover:scale-110"
-              src="https://i.pinimg.com/736x/d4/40/d4/d440d4a13a62c9d9dec50d983410922a.jpg"
-              alt="Gallery Image 4"
+              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500  rounded-[40px]    group-hover:scale-110"
+              src="https://i.pinimg.com/736x/4f/cd/b9/4fcdb9aac6d67376c951a4c68c4f80ee.jpg"
+              alt="Gallery Image 1"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-              <h3 className="font-bold text-lg">Project 4</h3>
-              <p className="text-sm">IT Training</p>
+              <h3 className="font-bold text-lg">Project 1</h3>
+              <p className="text-sm">Web Development</p>
             </div>
           </div>
         </div>

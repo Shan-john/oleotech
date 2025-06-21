@@ -7,7 +7,17 @@ import logobg from "../assets/images/logobg.png";
 import { CiMenuBurger } from "react-icons/ci";
 
 function Headersection() {
- 
+  const handleGmailRedirect = () => {
+    const email = "0leotechsolution@gmail.com";
+    const subject = "Let's Connect!";
+    const body = "Hi there, I'd like to know more about your services.";
+  
+    const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+      email
+    )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  
+    window.open(gmailURL, "_blank"); // opens in new tab
+  };
 
    
   
@@ -53,19 +63,24 @@ function Headersection() {
         </div>
       </div>
       {/* second header */}
-      <div className={`w-full flex items-center bg-white h-[clamp(20px,18vw,70px)] justify-between transition-transform duration-300 `}
+      <div className={`w-full flex items-center bg-white h-[clamp(17px,15vw,70px)] justify-between transition-transform duration-300 `}
 >
-        <div>
+        <div className="relative flex items-center justify-center">
           <img
-            className="realtive inset-0 md:mt-1    md:pt-0 md:h-[76px]      w-[clamp(20px,70vw,300px)]   h-[clamp(20px,18vw,73px)]   md:top-12 "
+            className="w-[clamp(20px,70vw,300px)] h-[clamp(20px,18vw,73px)] object-contain"
             src={logobg}
-            alt=""
+            alt="Background Logo"
           />
 
           <img
-            className="absolute inset-0 top-[clamp(45px,45vh,45px)]  ml-[clamp(2px,6vw,19px)]   w-[clamp(20px,50vw,100px)]   h-[clamp(10px,40vw,65px)]"
+            className="absolute w-[clamp(15px,45vw,80px)] h-[clamp(8px,35vw,55px)]   object-contain"
             src={image}
-            alt=""
+            alt="Overlay Logo"
+            style={{
+              left: '25%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)'
+            }}
           />
         </div>
 
@@ -99,16 +114,22 @@ function Headersection() {
             </li>
           </ul>
         </nav>
-        <div className="bg-blue-400  h-[clamp(30px,30vh,35px)]   flex rounded-[10px] items-center justify-center w-[clamp(30px,30vw,35px)]   lg:hidden mr-[50px]">
+        <div className="bg-blue-400  h-[clamp(30px,30vh,35px)]   flex rounded-[10px] items-center justify-center w-[clamp(30px,30vw,35px)]   lg:hidden mr-[50px] ">
           <CiMenuBurger size={20} onClick={()=>{setMenuButtonState(!isMenuButtonClicked)}} />
         </div>
 
-        <button class=" w-[clamp(25px,30vw,180px)]  mr-[10px] relative flex items-center justify-center  overflow-hidden  hidden lg:block  font-semibold text-white rounded-[49px]      h-[clamp(10px,10vw,50px)] bg-gray-800   group">
-          <span class="relative z-10 flex items-center gap-4  text-[clamp(0.6rem,1vw,14px)]">
-            Request A Quote <FaArrowRight />{" "}
-          </span>
-          <span class="absolute inset-0 bg-green-500 rounded-r-[50px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-in-out z-0"></span>
-        </button>
+        <div className="  justify-center  hidden lg:flex">
+  <button
+    onClick={handleGmailRedirect}
+    className="w-[clamp(25px,30vw,180px)] mr-[10px] relative   items-center justify-center overflow-hidden   font-semibold text-white rounded-[49px] h-[clamp(10px,10vw,50px)] bg-gray-800 group"
+  >
+    <span className="relative z-10 flex items-center justify-center gap-2 text-center text-[clamp(0.6rem,1vw,14px)]">
+      Enquiry <FaArrowRight />
+    </span>
+    <span className="absolute inset-0 bg-green-500 rounded-r-[50px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-in-out z-0"></span>
+  </button>
+</div>
+
       </div>
       {/* menu option only for mobile */}
      { isMenuButtonClicked==true? <div className="   inset-0  z-20 fixed block lg:hidden  w-[clamp(50vw,50vh,350px)] h-full bg-gray-200">

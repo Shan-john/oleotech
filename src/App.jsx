@@ -5,6 +5,7 @@ import './App.css'
 import Headersection from './Components/Headersection'
 import CarouselSlider from './Components/CarouselSlider'
 import BodySection from './Components/BodySection'
+import FooterSection from './Components/FooterSection'
  
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Headersection/>
         <CarouselSlider/>
         <BodySection/>
+        <FooterSection/>
        
         </div>
     </>
