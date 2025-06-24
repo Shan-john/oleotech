@@ -9,9 +9,14 @@ import {
 } from "react-icons/io5";
 import { FaRegClock } from "react-icons/fa";
 import { PiMoneyLight } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 function CarouselSlider() {
   const images = [image1, image2, image3];
+  const navigate = useNavigate();
+  const gotoServicepage = () => {
+    navigate("/service", );
+  };
   const captions = [
     "Driving Business Through Technology",
     "Reliable Web Solutions for Growing Brands",
@@ -73,11 +78,10 @@ function CarouselSlider() {
               <span className="absolute inset-0 bg-blue-950 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-in-out rounded-full" />
             </button>
 
-            <button  onClick={() => {
-                document.getElementById("body-section").scrollIntoView({
-                  behavior: "smooth",
-                });
-              }} className="group relative overflow-hidden  h-[clamp(4rem,2vh,1rem)]   w-[clamp(20rem,15vw,16rem)]  text-[clamp(1.3rem,1.6vw,1.6rem)] flex items-center justify-center uppercase rounded-full bg-transparent border-white text-white shadow-md border transition-all duration-500">
+            <button
+              onClick={ gotoServicepage}
+              className="group relative overflow-hidden  h-[clamp(4rem,2vh,1rem)]   w-[clamp(20rem,15vw,16rem)]  text-[clamp(1.3rem,1.6vw,1.6rem)] flex items-center justify-center uppercase rounded-full bg-transparent border-white text-white shadow-md border transition-all duration-500"
+            >
               <span className="z-10">Our Service</span>
               <span className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-in-out rounded-full" />
             </button>
@@ -157,27 +161,22 @@ function CarouselSlider() {
           <div className="flex flex-col md:flex-row justify-around  items-center    text-black w-[clamp(280px,80vw,1200px)]  md:w-[clamp(480px,60vm,980px)]  md:h-[clamp(90px,10vh,100px)] h-[clamp(80px,40vh,330px)] px-2     ">
             <div className="flex items-center justify-around w-[clamp(50vw,50vw,300px)]  md:w-[clamp(05vw ,50vw,300px)] gap-2   ">
               <IoLocationOutline />
-              <h2>Destination</h2>
+              <h2>14+ Years in IT</h2>
               <IoArrowDown />
             </div>
             <div className="h-[1px] md:h-[20px] w-full md:w-[1px] hidden md:block bg-black md:mx-[clamp(0px,2px,4px)]"></div>
             <div className="flex items-center justify-around  w-[clamp(50vw,50vw,300px)]  md:w-[clamp(50vw ,50vw,300px)] gap-2 ">
               <IoBicycleSharp />
-              <h2>Activity</h2>
+              <h2>50+ Enterprise Apps</h2>
               <IoArrowDown />
             </div>
             <div className="h-[1px] md:h-[20px] w-full md:w-[1px] hidden md:block bg-black  md:mx-[clamp(0px,2px,4px)]"></div>
             <div className="flex items-center justify-around w-[clamp(50vw,50vw,300px)]  md:w-[clamp(50vw ,50vw,300px)] gap-[clamp(0px,1px,2px)]">
               <FaRegClock />
-              <h2>3-Days - 6Days</h2>
+              <h2>99% Retention</h2>
               <IoArrowDown />
             </div>
-            <div className="h-[1px] md:h-[20px]  w-auto  md:w-[1px] hidden md:block bg-black  md:mx-[clamp(0px,2px,4px)]"></div>
-            <div className="flex items-center justify-around   w-[clamp(50vw,50vw,300px)]  md:w-[clamp(50vw ,50vw,300px)] gap-[clamp(0px,1px,2px)]">
-              <PiMoneyLight />
-              <h2>$200 - $500</h2>
-              <IoArrowDown />
-            </div>
+            
           </div>
         </div>
       </div>

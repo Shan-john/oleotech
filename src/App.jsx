@@ -1,27 +1,23 @@
-import { useState } from 'react'
- 
-import './App.css'
- 
-import Headersection from './Components/Headersection'
-import CarouselSlider from './Components/CarouselSlider'
-import BodySection from './Components/BodySection'
-import FooterSection from './Components/FooterSection'
- 
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import HomePage from './presentation/HomePage';
+import ServicePage from './presentation/ServicePage';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div   className=' w-full'>
-        <Headersection/>
-        <CarouselSlider/>
-        <BodySection/>
-        <FooterSection/>
-       
+    <Provider store={store}>
+      <BrowserRouter>
+        <div className="w-full">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/service" element={<ServicePage />} />
+          </Routes>
         </div>
-    </>
-  )
+      </BrowserRouter>
+    </Provider>
+  );
 }
 
-export default App
+export default App;

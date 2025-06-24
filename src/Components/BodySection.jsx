@@ -1,4 +1,6 @@
-import React, { Component, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getHomepageData } from "../features/homepage/homepageslice";
 
 import itrainingimage from "../assets/images/ittraining.png";
 import featuresimage from "../assets/images/features.png";
@@ -6,7 +8,14 @@ import webhostingiamge from "../assets/images/webhosting.png";
 import webdesignimage from "../assets/images/webdesign.png";
 import webdevelopmentimage from "../assets/images/webdevelopment.png";
 import softwaredevelopmentimage from "../assets/images/softwaredevelopment.png";
+
 function BodySection() {
+ 
+
+  // Access redux state
+  const { data, loading, error } = useSelector((state) => state.homepage);
+
+   
   const handleGmailRedirect = () => {
     const email = "0leotechsolution@gmail.com";
     const subject = "Let's Connect!";
@@ -19,45 +28,48 @@ function BodySection() {
     window.open(gmailURL, "_blank"); // opens in new tab
   };
   
+ 
   return (
-    <div  className="  bg-gradient-to-b from-green-50 mb-20 overflow-hidden  to-transparent flex flex-col  items-center  ">
-      <div className="w-full flex flex-wrap md:pt-[120px] pt-[110px] justify-center items-center gap-[clamp(20px,5vw,50px)] px-6 py-10">
+    <div  className=" md:mt-[50px]  bg-gradient-to-b from-green-50 mb-20 overflow-hidden  to-transparent flex flex-col  items-center  ">
+      <div className="w-full   flex flex-wrap md:pt-[120px] pt-[310px] justify-center items-center gap-[clamp(20px,5vw,50px)] px-6 py-10">
         {/* Project Done */}
-        <div className="bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-blue-500/50 hover:shadow-2xl hover:border-2 hover:border-blue-300 cursor-pointer relative overflow-hidden group">
+        <div className="bg-gradient-to-br from-green-950 to-green-500 text-white rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-blue-500/50 hover:shadow-2xl hover:border-2 hover:border-blue-300 cursor-pointer relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-          <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-blue-100 transition-colors duration-300">120+</h1>
+          <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-blue-100 transition-colors duration-300">{data[0]?.projectdonecount || '120+'}</h1>
           <p className="text-[clamp(0.8rem,2vw,18px)] font-medium group-hover:text-blue-200 transition-colors duration-300">
             Projects Done
           </p>
         </div>
 
         {/* Ongoing Projects */}
-        <div className="bg-gradient-to-br from-green-500 to-green-700 text-white rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-green-500/50 hover:shadow-2xl hover:border-2 hover:border-green-300 cursor-pointer relative overflow-hidden group">
+        <div className="bg-gradient-to-br from-green-950 to-green-500 text-white rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-green-500/50 hover:shadow-2xl hover:border-2 hover:border-green-300 cursor-pointer relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-          <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-green-100 transition-colors duration-300">8</h1>
+          <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-green-100 transition-colors duration-300">{data[0]?.ongoingprojectcount || '8'}</h1>
           <p className="text-[clamp(0.8rem,2vw,18px)] font-medium group-hover:text-green-200 transition-colors duration-300">
             Ongoing Projects
           </p>
         </div>
 
-        {/* Active Employees */}
-        <div className="bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-purple-500/50 hover:shadow-2xl hover:border-2 hover:border-purple-300 cursor-pointer relative overflow-hidden group">
+        {/* Active Projects */}
+        <div className="bg-gradient-to-br from-green-950 to-green-500 text-white rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-purple-500/50 hover:shadow-2xl hover:border-2 hover:border-purple-300 cursor-pointer relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-          <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-purple-100 transition-colors duration-300">25</h1>
+          <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-purple-100 transition-colors duration-300">{data[0]?.activeprojectcount || '25'}</h1>
           <p className="text-[clamp(0.8rem,2vw,18px)] font-medium group-hover:text-purple-200 transition-colors duration-300">
-            Active Employees
+            Active Projects
           </p>
         </div>
       </div>
 
-      <div id="body-section" className=" md:pt-[100px] pt-[210px] text-center">
+      <div  id="body-section" className=" md:mt-[150px] mt-[190px] mb-5 text-center">
         <h3 className="text-xl text-green-950 font-[cursive]">
-          Wonderful Place For You
+          Your Partner in Digital Excellence
         </h3>
-        <h1 className="text-6xl font-bold text-green-900">Tour Categories</h1>
+        <h1 className="   text-6xl font-bold text-green-900 bg-gradient-to-r from-green-600 to-green-700 bg-clip-text  ">
+          <span className="   z-10">About Our Company</span>
+          </h1>
       </div> 
 
-      <div className=" lg:mt-10 mt-5 flex items-center justify-center ">
+      <div className=" lg:mt-10 mt-16 flex items-center justify-center ">
         <div className="  pl-[clamp(0px,5vw,70px)] w-auto pr-[clamp(0px,5vw,70px)] xl:flex items-center justify-around lg:gap-40">
           <div className="relative group overflow-hidden rounded-2xl">
             <img
@@ -74,7 +86,7 @@ function BodySection() {
               About Us{" "}
             </h1>
             <p className="text-[clamp(0.9rem,2vw,28px)] text-green-950 font-semibold lg:text-base lg:leading-relaxed    ">
-              At our core, we are a passionate team of tech innovators dedicated
+              {data[0]?.aboutus || `At our core, we are a passionate team of tech innovators dedicated
               to delivering cutting-edge software development, web design, web
               hosting, and full-stack web development solutions. With a strong
               focus on quality and creativity, we help businesses bring their
@@ -84,10 +96,16 @@ function BodySection() {
               teams with the skills they need to thrive in today's digital
               world. Whether you're a startup or an enterprise, we are your
               trusted partner in building smart, secure, and future-ready
-              digital solutions.
+              digital solutions.`}
             </p>
-            <button  onClick={handleGmailRedirect}   className="text-white w-[clamp(12,5vw,60px)] h-[clamp(5px,5vh,50px)] font-[cursive] ">
-              Enquiry
+            <button 
+              onClick={handleGmailRedirect} 
+              className="group relative overflow-hidden text-white w-[100px]  h-[50px]  font-[cursive] bg-gradient-to-r from-green-600 to-green-700 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl"
+            >
+               
+              <span className="relative z-10">Enquiry</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1200 ease-out delay-100"></div>
             </button>
           </div>
         </div>
@@ -108,57 +126,23 @@ function BodySection() {
            
            `}
         >
-          <div className="group relative p-3 overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gradient-to-tr from-green-800">
-            <img
-              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500  rounded-[40px]    group-hover:scale-110"
-              src="https://i.pinimg.com/736x/4f/cd/b9/4fcdb9aac6d67376c951a4c68c4f80ee.jpg"
-              alt="Gallery Image 1"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-              <h3 className="font-bold text-lg">Project 1</h3>
-              <p className="text-sm">Web Development</p>
+          {data[0]?.project?.map((project, index) => (
+            <div key={index} className={`group relative p-3 overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+                  index % 2 === 0 ? 'bg-gradient-to-tr from-green-800' : 'bg-gradient-to-tr from-blue-800'
+                }`}>
+              <img
+                className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500  rounded-[40px]    group-hover:scale-110"
+                src={project.image}
+                alt={project.title}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                <h3 className="font-bold text-lg">{project.title}</h3>
+                <p className="text-sm">{project.category}</p>
+              </div>
             </div>
-          </div>
+          ))}
           
-          <div className="group relative p-3 overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gradient-to-tr from-blue-800">
-            <img
-              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500  rounded-[40px]    group-hover:scale-110"
-              src="https://i.pinimg.com/736x/4f/cd/b9/4fcdb9aac6d67376c951a4c68c4f80ee.jpg"
-              alt="Gallery Image 1"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-              <h3 className="font-bold text-lg">Project 1</h3>
-              <p className="text-sm">Web Development</p>
-            </div>
-          </div>
-
-          <div className="group relative p-3 overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gradient-to-tr from-green-800">
-            <img
-              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500  rounded-[40px]    group-hover:scale-110"
-              src="https://i.pinimg.com/736x/4f/cd/b9/4fcdb9aac6d67376c951a4c68c4f80ee.jpg"
-              alt="Gallery Image 1"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-              <h3 className="font-bold text-lg">Project 1</h3>
-              <p className="text-sm">Web Development</p>
-            </div>
-          </div>
-
-          <div className="group relative p-3 overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gradient-to-tr from-blue-800">
-            <img
-              className="w-[clamp(200px,80vw,400px)] h-[clamp(100px,40vh,250px)] object-cover transition-transform duration-500  rounded-[40px]    group-hover:scale-110"
-              src="https://i.pinimg.com/736x/4f/cd/b9/4fcdb9aac6d67376c951a4c68c4f80ee.jpg"
-              alt="Gallery Image 1"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-              <h3 className="font-bold text-lg">Project 1</h3>
-              <p className="text-sm">Web Development</p>
-            </div>
-          </div>
         </div>
        </div>
     </div>
