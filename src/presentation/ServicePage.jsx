@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
 import Headersection from "../Components/Headersection";
-import FooterSection from "../Components/footersection";
+import FooterSection from "../Components/FooterSection";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomepageData } from "../features/homepage/homepageslice";
 import serviceimage from "../assets/images/service.png";

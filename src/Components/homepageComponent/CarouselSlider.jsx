@@ -1,7 +1,7 @@
 import React from "react";
-import image1 from "../assets/images/ca-1.png";
-import image2 from "../assets/images/ca-3.png";
-import image3 from "../assets/images/ca-4.png";
+import image1 from "../../assets/images/ca-1.png";
+import image2 from "../../assets/images/ca-3.png";
+import image3 from "../../assets/images/ca-4.png";
 import {
   IoLocationOutline,
   IoArrowDown,
@@ -74,15 +74,19 @@ function CarouselSlider() {
               }}
               className="group relative overflow-hidden h-[clamp(4rem,2vh,1rem)]   w-[clamp(20rem,15vw,16rem)] bg-blue-500 text-[clamp(1.3rem,1.6vw,1.6rem)] flex items-center justify-center uppercase rounded-full backdrop-blur-md text-white shadow-md border-0 transition-all duration-500"
             >
-              <span className="z-10">View Projects</span>
+              <span className="z-10">Portfolio</span>
               <span className="absolute inset-0 bg-blue-950 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-in-out rounded-full" />
             </button>
 
             <button
-              onClick={ gotoServicepage}
+              onClick={() => {
+                document.getElementById("About-section").scrollIntoView({
+                  behavior: "smooth",
+                });
+              }  }
               className="group relative overflow-hidden  h-[clamp(4rem,2vh,1rem)]   w-[clamp(20rem,15vw,16rem)]  text-[clamp(1.3rem,1.6vw,1.6rem)] flex items-center justify-center uppercase rounded-full bg-transparent border-white text-white shadow-md border transition-all duration-500"
             >
-              <span className="z-10">Our Service</span>
+              <span className="z-10">About US</span>
               <span className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-in-out rounded-full" />
             </button>
           </div>
@@ -113,20 +117,7 @@ function CarouselSlider() {
             </svg>
           </button>
 
-          {[0, 1, 2].map((index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setDirection(index > currentIndex ? "next" : "prev");
-                setCurrentIndex(index);
-              }}
-              className={`h-[50px] w-[1px] transition-all duration-300 ${
-                currentIndex === index
-                  ? "bg-black"
-                  : "bg-white hover:bg-green-500"
-              }`}
-            />
-          ))}
+          
 
           <button
             onClick={() => {

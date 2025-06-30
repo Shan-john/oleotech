@@ -30,7 +30,10 @@ function Headersection() {
   const gotoHomePage = () => {
     navigate("/",);
   };
-
+  const gotoAboutUs = ()=>{
+    navigate("/aboutus");
+  }
+  
   useEffect(() => {
     const handleScroll = () => {
       if (document.body.offsetHeight) {
@@ -124,15 +127,13 @@ function Headersection() {
               
             </li>
 
+     
             <li className=" w-auto">
-              <a className="text-gray-800 font-semibold  ">Technology</a>
-            </li>
-            <li className=" w-auto">
-              <a className="text-gray-800 font-semibold ">Blog</a>
+              <a className="text-gray-800 font-semibold ">Contact</a>
             </li>
             
             <li className=" w-auto ">
-              <a className="text-gray-800 font-semibold   ">AboutUs</a>
+              <a onClick={ gotoAboutUs} className="text-gray-800 font-semibold   ">AboutUs</a>
             </li>
           </ul>
         </nav>

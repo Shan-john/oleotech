@@ -2,12 +2,12 @@ import React,{useEffect} from 'react'
  
 import { useDispatch, useSelector } from "react-redux";
 import { getHomepageData } from "../features/homepage/homepageslice";
-import CarouselSlider from '../Components/CarouselSlider';
-import BodySection from '../Components/BodySection';
+import CarouselSlider from '../Components/homepageComponent/CarouselSlider';
+import BodySection from '../Components/homepageComponent/BodySection';
 
 import WhatsAppFloat from '../Components/WhatsAppFloat';
 import Headersection from '../Components/Headersection';
-import FooterSection from '../Components/footersection';
+import FooterSection from '../Components/FooterSection';
 
 function HomePage() {
   const dispatch = useDispatch();
