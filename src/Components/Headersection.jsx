@@ -24,6 +24,9 @@ function Headersection() {
   const [showButton, setShowButton] = useState(false);
   const navigate = useNavigate();
   
+  const gotoContactpage=()=>{
+    navigate("/contactus");
+  }
   const gotoServicepage = () => {
     navigate("/service", );
   };
@@ -51,7 +54,7 @@ function Headersection() {
 
   const [isMenuButtonClicked, setMenuButtonState] = useState(false);
   return (
-    <div className={`w-full relative transition-transform duration-300  `}>
+    <div className={`w-full relative transition-transform duration-300 border-b  `}>
       <div className="  h-[clamp(10px,5vh,50px)] overflow-hidden  w-full bg-white   flex justify-between items-center       gap-1">
         <div className=" lg:flex sm:flex    justify-start  text-black  pl-[clamp(4px,5vw,0px)] h-[clamp(10px,5vh,50px)]  w-[clamp(100px,50vw,700px)]    hidden sm:block  text-[clamp(0rem,2vw,12px)]">
           {" "}
@@ -129,7 +132,7 @@ function Headersection() {
 
      
             <li className=" w-auto">
-              <a className="text-gray-800 font-semibold ">Contact</a>
+              <a onClick={gotoContactpage} className="text-gray-800 font-semibold ">Contact</a>
             </li>
             
             <li className=" w-auto ">
@@ -152,7 +155,7 @@ function Headersection() {
             className="w-[clamp(25px,30vw,180px)] mr-[10px] relative   items-center justify-center overflow-hidden   font-semibold text-white rounded-[49px] h-[clamp(10px,10vw,50px)] bg-gray-800 group"
           >
             <span className="relative z-10 flex items-center justify-center gap-2 text-center text-[clamp(0.6rem,1vw,14px)]">
-              Enquiry <FaArrowRight />
+            Enquiry <FaArrowRight />    
             </span>
             <span className="absolute inset-0 bg-green-500 rounded-r-[50px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-in-out z-0"></span>
           </button>

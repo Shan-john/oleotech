@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getHomepageData } from "../../features/homepage/homepageslice";
-
+ 
 import itrainingimage from "../../assets/images/ittraining.png";
 import featuresimage from "../../assets/images/features.png";
 import webhostingiamge from "../../assets/images/webhosting.png";
@@ -12,8 +11,9 @@ import { useNavigate } from "react-router-dom";
 
 function BodySection() {
   // Access redux state
-  const { data, loading, error } = useSelector((state) => state.homepage);
-
+ 
+  const homepageData = useSelector((state)=>state.appPage.homepageData);
+ 
   const handleGmailRedirect = () => {
     const email = "0leotechsolution@gmail.com";
     const subject = "Let's Connect!";
@@ -34,10 +34,10 @@ navigate("./aboutus")
     <div className=" md:mt-[50px]  bg-gradient-to-b from-green-50 mb-20 overflow-hidden  to-transparent flex flex-col  items-center  ">
       <div className="w-full   flex flex-wrap md:pt-[120px] pt-[310px] justify-center items-center gap-[clamp(20px,5vw,50px)] px-6 py-10">
         {/* Project Done */}
-        <div className="bg-gradient-to-br from-green-950 to-green-500 text-white rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-blue-500/50 hover:shadow-2xl hover:border-2 hover:border-blue-300 cursor-pointer relative overflow-hidden group">
+        <div className="bg-gradient-to-br from-green-100 to-green-50 text-green-800 rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-blue-500/50 hover:shadow-2xl hover:border-2 hover:border-blue-300 cursor-pointer relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
           <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-blue-100 transition-colors duration-300">
-            {data[0]?.projectdonecount || "120+"}
+            { homepageData[0]?.projectdonecount ||  "120+"}
           </h1>
           <p className="text-[clamp(0.8rem,2vw,18px)] font-medium group-hover:text-blue-200 transition-colors duration-300">
             Projects Done
@@ -45,10 +45,10 @@ navigate("./aboutus")
         </div>
 
         {/* Ongoing Projects */}
-        <div className="bg-gradient-to-br from-green-950 to-green-500 text-white rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-green-500/50 hover:shadow-2xl hover:border-2 hover:border-green-300 cursor-pointer relative overflow-hidden group">
+        <div className="bg-gradient-to-br from-green-100 to-green-50  text-green-800 rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-green-500/50 hover:shadow-2xl hover:border-2 hover:border-green-300 cursor-pointer relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
           <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-green-100 transition-colors duration-300">
-            {data[0]?.ongoingprojectcount || "8"}
+            {homepageData[0]?.ongoingprojectcount || "0"}
           </h1>
           <p className="text-[clamp(0.8rem,2vw,18px)] font-medium group-hover:text-green-200 transition-colors duration-300">
             Ongoing Projects
@@ -56,10 +56,10 @@ navigate("./aboutus")
         </div>
 
         {/* Active Projects */}
-        <div className="bg-gradient-to-br from-green-950 to-green-500 text-white rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-purple-500/50 hover:shadow-2xl hover:border-2 hover:border-purple-300 cursor-pointer relative overflow-hidden group">
+        <div className="bg-gradient-to-br from-green-100 to-green-50  text-green-800 rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-purple-500/50 hover:shadow-2xl hover:border-2 hover:border-purple-300 cursor-pointer relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
           <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-purple-100 transition-colors duration-300">
-            {data[0]?.activeprojectcount || "25"}
+            {homepageData[0]?.activeprojectcount || "0"}
           </h1>
           <p className="text-[clamp(0.8rem,2vw,18px)] font-medium group-hover:text-purple-200 transition-colors duration-300">
             Active Projects
@@ -93,10 +93,10 @@ navigate("./aboutus")
 
           <div className="w-[clamp(50px,90vw,700px)]   border-black flex-col lg:gap-10 gap-4 lg:mt-5  rounded-[50px] flex justify-start items-center p-10   ">
             <h1 className="uppercase text-green-900 font-bold text-[clamp(0.9rem,2vw,28px)]  font-[cursive] underline">
-              More details{" "}
+              details{" "}
             </h1>
             <p className="text-[clamp(0.9rem,2vw,28px)] text-green-950 font-semibold lg:text-base lg:leading-relaxed    ">
-              {data[0]?.aboutus ||
+              {homepageData[0]?.aboutus.details ||
        "OleoTech Solution is a tailor end Web Development consulting company functioning since 2014. The company is promoted and managed by a team of experts from the different streams of Technology & Management."}       </p>
             <button
               onClick={gotoAboutUs }
@@ -126,7 +126,7 @@ navigate("./aboutus")
            
            `}
         >
-          {data[0]?.project?.map((project, index) => (
+          {homepageData[0]?.project?.map((project, index) => (
             <div
               key={index}
               className={`group relative p-3 overflow-hidden rounded-[50px] border-[2px] transition-all duration-300 hover:scale-105 hover:shadow-xl ${

@@ -3,18 +3,21 @@ import { FaQuoteLeft } from "react-icons/fa";
 import Headersection from "../Components/Headersection";
 import FooterSection from "../Components/FooterSection";
 import { useDispatch, useSelector } from "react-redux";
-import { getHomepageData } from "../features/homepage/homepageslice";
+import {  getServicepageDate } from "../features/homepage/appSlice";
 import serviceimage from "../assets/images/service.png";
 function ServicePage() {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.homepage);
+ 
   useEffect(() => {
-    dispatch(getHomepageData());
+    dispatch(getServicepageDate());
   }, [dispatch]);
+ const   serviceLoading = useSelector((state) => state.appPage.serviceLoading);
+  const serviceDate = useSelector((state)=>state.appPage.serviceData);
+   const serviceError = useSelector((state)=>state.appPage.serviceError);
+  if (serviceLoading) return <p className="text-black" >Loading...</p>;
+  if (serviceError) return <p  className="text-black">Error: {error}</p>;
+  if (!serviceDate || serviceDate.length === 0) return <p  className="text-black">No data available.</p>;
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (!data || data.length === 0) return <p>No data available.</p>;
   return (
     <div className=" flex flex-col items-center  ">
       <Headersection />
@@ -33,30 +36,22 @@ function ServicePage() {
       </div>
 
       {/* Content Section */}
-      <div className="w-full max-w-6xl mt-[clamp(10px,30vh,210px)] flex flex-col lg:flex-row items-center justify-between px-6 gap-10">
-        <div className="h-[clamp(80px,50vh,300px)] w-[3px]   bg-black"> </div>
+      <div className="w-full max-w-6xl mt-[clamp(10px,30vh,210px)] flex md:flex-col        flex-col lg:flex-row items-center justify-between px-6 gap-10    ">
+      
         {/* Left Column: Testimonial + Progress */}
-        <div className="flex flex-col flex-1 space-y-6 items-start">
+        <div className="flex flex-col flex-1 space-y-6 items-start  border-l-4 border-black pl-6">
           {/* Quote */}
-
+          
           <div className="flex items-start space-x-4">
             <FaQuoteLeft size={30} color="black" />
             <h1 className="text-black max-w-md text-2xl font-serif font-bold text-balance">
-              Web Development
+               {serviceDate[0].services[0].heading}
             </h1>
           </div>
 
           {/* Subtext */}
           <p className="text-gray-600 max-w-md  text-balance">
-            At Oleotech Solutions, we build high-performance websites that work
-            flawlessly across all devices. Our web development team specializes
-            in creating customized, scalable, and secure solutions using the
-            latest technologies like HTML5, CSS3, JavaScript, React, and PHP.
-            Whether you're looking for a corporate website, a personal
-            portfolio, or an interactive platform, we ensure your site is
-            optimized for speed, responsiveness, and SEO compatibility. Every
-            line of code we write is structured for performance and future
-            scalability.
+            {serviceDate[0]?.services[0].description}
           </p>
 
           {/* Author Info */}
@@ -93,20 +88,12 @@ function ServicePage() {
             <div className="flex items-start space-x-4">
               <FaQuoteLeft size={30} color="black" />
               <h1 className="text-black max-w-md text-2xl font-serif font-bold text-balance">
-                Mobile Development
+                {serviceDate[0]?.services[1].heading}
               </h1>
             </div>
 
             <p className="text-gray-600 xs:mt-9 sm:mt-10 md:mt-10 lg:mt-19 max-w-md  text-balance">
-              At Oleotech Solutions, we build high-performance websites that
-              work flawlessly across all devices. Our web development team
-              specializes in creating customized, scalable, and secure solutions
-              using the latest technologies like HTML5, CSS3, JavaScript, React,
-              and PHP. Whether you're looking for a corporate website, a
-              personal portfolio, or an interactive platform, we ensure your
-              site is optimized for speed, responsiveness, and SEO
-              compatibility. Every line of code we write is structured for
-              performance and future scalability.
+               {serviceDate[0]?.services[1].description}
             </p>
           </div>
         </div>
@@ -120,18 +107,12 @@ function ServicePage() {
               <div className="flex items-start space-x-4">
                 <FaQuoteLeft size={30} color="black" />
                 <h1 className="text-black max-w-md text-2xl font-serif font-bold text-balance">
-                  Domain Registration & Web Hosting
+                 {serviceDate[0]?.services[2].heading}
                 </h1>
               </div>
 
               <p className="text-gray-600 xs:mt-9 sm:mt-10 md:mt-10 lg:mt-19 max-w-md  text-balance">
-                We offer fast, secure, and reliable domain registration and web
-                hosting services. No need to juggle multiple vendors—get
-                everything under one roof. Our hosting solutions include
-                cloud-based options, dedicated servers, and shared hosting plans
-                with features like daily backups, SSL certificates, unlimited
-                bandwidth, and 24/7 monitoring. Rest assured, your site stays
-                online and secure—always.
+                {serviceDate[0]?.services[2].description}
               </p>
             </div>
           </div>
@@ -148,36 +129,24 @@ function ServicePage() {
           <div className="flex items-start space-x-4">
             <FaQuoteLeft size={30} color="black" />
             <h1 className="text-black max-w-md text-2xl font-serif font-bold text-balance">
-             SEO & Digital Marketing
+            {serviceDate[0]?.services[3].heading}
             </h1>
           </div>
 
           <p className="text-gray-600 xs:mt-9 sm:mt-10 md:mt-10 lg:mt-19 max-w-md  text-balance">
-            Having a website is just the start—getting found online is where we
-            come in. Our digital marketing and SEO services help improve your
-            website's visibility on Google and other search engines. We use
-            proven white-hat SEO techniques, keyword strategies, link-building,
-            and content optimization to drive more organic traffic to your site.
-            We also run PPC campaigns, email marketing, and social media
-            strategies to boost your brand presence and generate quality leads.
+           {serviceDate[0]?.services[3].description}
           </p>
         </div>
         <div className="flex    flex-col ">
           <div className="flex items-start space-x-4">
             <FaQuoteLeft size={30} color="black" />
             <h1 className="text-black max-w-md text-2xl font-serif font-bold text-balance">
-              Website  Maintenance & Support
+             {serviceDate[0]?.services[4].heading}
             </h1>
           </div>
 
           <p className="text-gray-600 xs:mt-9 sm:mt-10 md:mt-10 lg:mt-19 max-w-md  text-balance">
-            Let us handle the tech while you focus on your business. Our website
-            maintenance service ensures that your site is always updated,
-            secure, and fast. We provide regular content updates, performance
-            monitoring, bug fixes, security audits, and backups to give you
-            peace of mind. Whether it's a minor change or a critical issue, our
-            support team is just a call away—always available to keep your site
-            running smoothly
+            {serviceDate[0]?.services[4].description}
           </p>
         </div>
       </div>

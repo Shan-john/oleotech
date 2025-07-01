@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
  
 import { useDispatch, useSelector } from "react-redux";
-import { getHomepageData } from "../features/homepage/homepageslice";
+import { getHomepageData } from "../features/homepage/appSlice";
 import CarouselSlider from '../Components/homepageComponent/CarouselSlider';
 import BodySection from '../Components/homepageComponent/BodySection';
 
@@ -13,7 +13,9 @@ function HomePage() {
   const dispatch = useDispatch();
 
   // Access redux state
-  const { data, loading, error } = useSelector((state) => state.homepage);
+  const homepageloading  = useSelector((state) => state.appPage.homepageLoading);
+  const homepageData = useSelector((state)=>state.appPage.homepageData);
+  const homepageerror = useSelector((state)=> state.appPage.homepageError);
   // Dispatch API call on mount
   useEffect(() => {
     dispatch(getHomepageData());
@@ -21,9 +23,9 @@ function HomePage() {
   }, [dispatch]);
  
  
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (!data || data.length === 0) return <p>No data available.</p>;
+  if (homepageloading) return <p>Loading...</p>;
+  if (homepageerror) return <p>Error: {homepageerror}</p>;
+  if (!homepageData || homepageData.length === 0) return <p>No data available.</p>;
 
   return (
     <div> 
