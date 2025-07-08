@@ -48,7 +48,7 @@ navigate("./aboutus")
         <div className="bg-gradient-to-br from-green-100 to-green-50  text-green-800 rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-green-500/50 hover:shadow-2xl hover:border-2 hover:border-green-300 cursor-pointer relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
           <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-green-100 transition-colors duration-300">
-            {homepageData[0]?.ongoingprojectcount || "0"}
+            {homepageData[0]?.happyclientcount || "0"}
           </h1>
           <p className="text-[clamp(0.8rem,2vw,18px)] font-medium group-hover:text-green-200 transition-colors duration-300">
             Ongoing Projects
@@ -59,7 +59,7 @@ navigate("./aboutus")
         <div className="bg-gradient-to-br from-green-100 to-green-50  text-green-800 rounded-2xl shadow-lg w-[clamp(180px,25vw,250px)] h-[clamp(100px,25vh,150px)] flex flex-col justify-center items-center transition-all duration-500 hover:shadow-purple-500/50 hover:shadow-2xl hover:border-2 hover:border-purple-300 cursor-pointer relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
           <h1 className="text-[clamp(1.5rem,4vw,40px)] font-bold group-hover:text-purple-100 transition-colors duration-300">
-            {homepageData[0]?.activeprojectcount || "0"}
+            {homepageData[0]?.employeecount || "0"}
           </h1>
           <p className="text-[clamp(0.8rem,2vw,18px)] font-medium group-hover:text-purple-200 transition-colors duration-300">
             Active Projects
