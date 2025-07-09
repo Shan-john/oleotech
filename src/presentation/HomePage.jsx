@@ -23,7 +23,17 @@ function HomePage() {
   }, [dispatch]);
  
  
-  if (homepageloading) return <p>Loading...</p>;
+ if (homepageloading) {
+  return (
+    <div className="flex items-center justify-center h-screen bg-white">
+      <div className="flex flex-col items-center gap-2">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500"></div>
+        <p className="text-slate-700 text-lg font-medium">Loading, please wait...</p>
+      </div>
+    </div>
+  );
+}
+
   if (homepageerror) return <p>Error: {homepageerror}</p>;
   if (!homepageData || homepageData.length === 0) return <p>No data available.</p>;
 

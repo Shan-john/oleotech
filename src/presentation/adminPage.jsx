@@ -1,4 +1,36 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
+const EditModal = ({ title, value, onClose, onSave }) => {
+  const [input, setInput] = useState(value);
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+      <div className="bg-white p-6 rounded shadow-md w-96">
+        <h2 className="text-lg font-semibold mb-4">{title}</h2>
+        <textarea
+          className="border p-2 w-full rounded mb-4 bg-white"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          rows={3}
+        />
+        <div className="flex justify-end space-x-4">
+          <button
+            className="bg-gray-400 text-white px-4 py-2 rounded"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+          <button
+            className="bg-blue-600 text-white px-4 py-2 rounded"
+            onClick={() => onSave(input)}
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const AdminPanel = () => {
   const [data, setData] = useState({
@@ -6,109 +38,73 @@ const AdminPanel = () => {
     employeecount: "",
     happyclientcount: "",
     aboutus: { details: "", fulldetail: "" },
-    project: [
-      { title: "", category: "" },
-      { title: "", category: "" },
-      { title: "", category: "" },
-      { title: "", category: "" },
-    ],
+    project: Array(4).fill({ title: "", category: "", image: null }),
   });
+  const [services, setServices] = useState(Array(5).fill({ heading: "", description: "" }));
 
-  const [services, setServices] = useState([
-    { heading: "", description: "" },
-    { heading: "", description: "" },
-    { heading: "", description: "" },
-    { heading: "", description: "" },
-    { heading: "", description: "" },
-  ]);
-
-  const [projectImages, setProjectImages] = useState([null, null, null, null]);
+  const [modalField, setModalField] = useState(null);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalIndex, setModalIndex] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [fetchedBodyData,setFetchedBodyData] =useState(null);
-  const [fetchedServicedata,setFetchedServiceData] =useState(null);
+  const [fetchedBodyData, setFetchedBodyData] = useState(null);
+  const [fetchedServiceData, setFetchedServiceData] = useState(null);
+
   useEffect(() => {
     const fetchBodyData = async () => {
       try {
         const res = await fetch("http://localhost:3000/api/oleotechsolution/homepage", {
-          method: "GET"
+          method: "GET",
         });
-  
-        if (!res.ok) {
-          throw new Error(`Homepage fetch failed: ${res.status}`);
-        }
-  
+        if (!res.ok) throw new Error(`Homepage fetch failed: ${res.status}`);
         const data = await res.json();
         setFetchedBodyData(data);
-        
+        setData((prev) => ({
+          ...prev,
+          ...data[0],
+          aboutus: data[0].aboutus || prev.aboutus,
+          project: data[0].project || prev.project,
+        }));
       } catch (error) {
-        console.error("❌ Homepage fetch error:", error);
+        console.error("Homepage fetch error:", error);
       }
     };
-  
-    const fetchServicedata = async () => {
+
+    const fetchServiceData = async () => {
       try {
         const res = await fetch("http://localhost:3000/api/oleotechsolution/servicepage", {
           method: "GET",
         });
-  
-        if (!res.ok) {
-          throw new Error(`Service fetch failed: ${res.status}`);
-        }
-  
+        if (!res.ok) throw new Error(`Service fetch failed: ${res.status}`);
         const data = await res.json();
         setFetchedServiceData(data);
-     console.log(data)
+        setServices(data[0]?.services || services);
       } catch (error) {
-        console.error("❌ Service fetch error:", error);
+        console.error("Service fetch error:", error);
       }
     };
-  
-    // 📌 Fetch both in parallel, and wait for both to finish
-    const fetchAllData = async () => {
-      setLoading(true); // Start loading
-      await Promise.all([fetchBodyData(), fetchServicedata()]);
-      setLoading(false); // Stop loading once both are done
+
+    const fetchAll = async () => {
+      await Promise.all([fetchBodyData(), fetchServiceData()]);
+      setLoading(false);
     };
-  
-    fetchAllData();
+
+    fetchAll();
   }, []);
-  
-
-
-  const handleProjectChange = (index, field, value) => {
-    const updatedProjects = [...data.project];
-    updatedProjects[index][field] = value;
-    setData((prev) => ({ ...prev, project: updatedProjects }));
-  };
-
-  const handleImageChange = (index, file) => {
-    const updatedImages = [...projectImages];
-    updatedImages[index] = file;
-    setProjectImages(updatedImages);
-  };
-
-  const handleServiceChange = (index, field, value) => {
-    const updatedServices = [...services];
-    updatedServices[index][field] = value;
-    setServices(updatedServices);
-  };
 
   const handleHomepageSubmit = async () => {
     const formData = new FormData();
+    formData.append("projectdonecount", data.projectdonecount);
+    formData.append("employeecount", data.employeecount);
+    formData.append("happyclientcount", data.happyclientcount);
+    formData.append("aboutus", JSON.stringify(data.aboutus));
 
-    formData.append("projectdonecount", data.projectdonecount );
-    formData.append("employeecount", data.employeecount   );
-    formData.append("happyclientcount", data.happyclientcount  );
-    formData.append("aboutus", JSON.stringify(data.aboutus) );
+    const projectCopy = data.project.map(({ title, category }) => ({ title, category }));
+    formData.append("project", JSON.stringify(projectCopy));
 
-    const projectWithoutImages = data.project.map((proj) => ({
-      title: proj.title ,
-      category: proj.category,
-    }));
-    formData.append("project", JSON.stringify(projectWithoutImages)  );
-
-    projectImages.forEach((img) => {
-      if (img) formData.append("projectimages", img);
+    data.project.forEach((p, i) => {
+      if (p.image) {
+        formData.append("projectimages", p.image);
+      }
     });
 
     try {
@@ -129,9 +125,7 @@ const AdminPanel = () => {
     try {
       const res = await fetch("http://localhost:3000/api/oleotechsolution/servicepage", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ services }),
       });
       const result = await res.json();
@@ -143,111 +137,130 @@ const AdminPanel = () => {
     }
   };
 
-  if (loading) return <div className="text-slate-950">Loading...</div>;
+  const handleSave = (newValue) => {
+    if (modalField.startsWith("project.")) {
+      const key = modalField.split(".")[1];
+      const updated = [...data.project];
+      updated[modalIndex][key] = newValue;
+      setData((prev) => ({ ...prev, project: updated }));
+    } else if (modalField.startsWith("services.")) {
+      const key = modalField.split(".")[1];
+      const updated = [...services];
+      updated[modalIndex][key] = newValue;
+      setServices(updated);
+    } else if (modalField.includes("aboutus")) {
+      const key = modalField.split(".")[1];
+      setData((prev) => ({ ...prev, aboutus: { ...prev.aboutus, [key]: newValue } }));
+    } else {
+      setData((prev) => ({ ...prev, [modalField]: newValue }));
+    }
+    setModalField(null);
+    setModalIndex(null);
+  };
+
+ if (loading) {
+  return (
+    <div className="flex items-center justify-center h-screen bg-white">
+      <div className="flex flex-col items-center gap-2">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500"></div>
+        <p className="text-slate-700 text-lg font-medium">Loading, please wait...</p>
+      </div>
+    </div>
+  );
+}
+
 
   return (
     <div className="p-6 max-w-6xl mx-auto bg-white text-gray-900">
       <h1 className="text-3xl font-bold mb-6 text-center">Admin Dashboard</h1>
 
-      {/* Basic Input Fields */}
-      <section className="grid grid-cols-1 gap-6 mb-8">
-        <input
-          className="border p-3 rounded bg-green-50"
-          placeholder={  fetchedBodyData[0].projectdonecount==null ? "Projects Done": fetchedBodyData[0].projectdonecount}
-          value={data.projectdonecount}
-          onChange={(e) =>
-            setData({ ...data, projectdonecount: e.target.value })
-          }
-        />
-        <input
-          className="border p-3 rounded bg-green-50"
-          placeholder={fetchedBodyData[0].employeecount==null?"Ongoing Projects":fetchedBodyData[0].employeecount}
-          value={data.employeecount }
-          onChange={(e) =>
-            setData({ ...data, employeecount: e.target.value })
-          }
-        />
-        <input
-          className="border p-3 rounded bg-green-50"
-          placeholder={fetchedBodyData[0].happyclientcount ===null?"Active Projects":fetchedBodyData[0].happyclientcount}
-          value={data.happyclientcount }
-          onChange={(e) =>
-            setData({ ...data, happyclientcount: e.target.value })
-          }
-        />
-        <input
-          className="border p-3 rounded bg-green-50"
-          placeholder={ fetchedBodyData[0].aboutus.details ==null?"About Us (Short Detail)": fetchedBodyData[0].aboutus.details}
-          value={data.aboutus?.details  }
-          onChange={(e) =>
-            setData({
-              ...data,
-              aboutus: { ...data.aboutus, details: e.target.value },
-            })
-          }
-        />
-      </section>
-
-      {/* Full About Us */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2">About Us (Full Detail)</h2>
-        <textarea
-          className="border p-3 w-full rounded bg-green-50"
-          placeholder={ fetchedBodyData[0].aboutus.fulldetail ==null ?`Full Detail ` :  fetchedBodyData[0].aboutus.fulldetail}
-          rows={4}
-          value={data.aboutus.fulldetail }
-          onChange={(e) =>
-            setData({
-              ...data,
-              aboutus: { ...data.aboutus, fulldetail: e.target.value },
-            })
-          }
-        />
-      </section>
-
-      {/* Project Section */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2">Projects (4 Inputs)</h2>
-        {[0, 1, 2, 3].map((index) => (
-          <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <input
-              className="border p-2 rounded bg-green-50"
-              placeholder={fetchedBodyData[0].project[index].title ? `Title ${index + 1}` :fetchedBodyData[0].project[index].title}
-              value={data.project[index].title }
-              onChange={(e) =>
-                handleProjectChange(index, "title", e.target.value)
-              }
-            />
-            <input
-              className="border p-2 rounded bg-green-50"
-              placeholder={fetchedBodyData[0].project[index].category ==null?`Category ${index + 1}`:fetchedBodyData[0].project[index].category}
-              value={data.project[index].category }
-              onChange={(e) =>
-                handleProjectChange(index, "category", e.target.value)
-              }
-            />
-            <div className="flex flex-col items-start space-y-2">
-  <img
-    src={fetchedBodyData[0].project[index].image}
-    alt="Project Preview"
-    className="w-40 h-40 object-cover border rounded"
-  />
-
-  <input
-    type="file"
-    accept="image/*"
-    className="border p-2 rounded bg-green-50"
-    onChange={(e) => handleImageChange(index, e.target.files[0])}
-  />
-</div>
-
-                  
+      <section className="grid grid-cols-1 gap-4 mb-8">
+        {["projectdonecount", "employeecount", "happyclientcount"].map((key) => (
+          <div
+            key={key}
+            className="p-3 border rounded bg-green-100 cursor-pointer"
+            onClick={() => {
+              setModalField(key);
+              setModalTitle(`Edit ${key}`);
+            }}
+          >
+            {data[key] || fetchedBodyData?.[0]?.[key] || `Click to enter ${key}`}
           </div>
         ))}
       </section>
 
-      {/* Submit Homepage Button */}
-      <div className="text-center mb-12">
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2">About Us</h2>
+        {["details", "fulldetail"].map((key) => (
+          <div
+            key={key}
+            className="p-3 border rounded bg-green-100 cursor-pointer mb-2"
+            onClick={() => {
+              setModalField(`aboutus.${key}`);
+              setModalTitle(`Edit About Us (${key})`);
+            }}
+          >
+            {data.aboutus[key] || fetchedBodyData?.[0]?.aboutus?.[key] || `Click to enter ${key}`}
+          </div>
+        ))}
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2">Projects</h2>
+        {data.project.map((p, i) => (
+          <div key={i} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 items-center">
+            {["title", "category"].map((field) => (
+              <div
+                key={field}
+                className="p-3 border rounded bg-green-100 cursor-pointer"
+                onClick={() => {
+                  setModalField(`project.${field}`);
+                  setModalIndex(i);
+                  setModalTitle(`Edit Project ${i + 1} - ${field}`);
+                }}
+              >
+                {p[field] || `Click to enter ${field}`}
+              </div>
+            ))}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  const updated = [...data.project];
+                  updated[i].image = file;
+                  setData((prev) => ({ ...prev, project: updated }));
+                }
+              }}
+              className="bg-green-50 p-2 rounded border"
+            />
+          </div>
+        ))}
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2">Services</h2>
+        {services.map((s, i) => (
+          <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {["heading", "description"].map((field) => (
+              <div
+                key={field}
+                className="p-3 border rounded bg-green-100 cursor-pointer"
+                onClick={() => {
+                  setModalField(`services.${field}`);
+                  setModalIndex(i);
+                  setModalTitle(`Edit Service ${i + 1} - ${field}`);
+                }}
+              >
+                {s[field] || `Click to enter ${field}`}
+              </div>
+            ))}
+          </div>
+        ))}
+      </section>
+
+      <div className="text-center mb-8">
         <button
           className="bg-purple-700 text-white px-6 py-3 rounded"
           onClick={handleHomepageSubmit}
@@ -256,33 +269,6 @@ const AdminPanel = () => {
         </button>
       </div>
 
-      {/* Services Section */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2">Services (5 Inputs)</h2>
-        {[0, 1, 2, 3, 4].map((index) => (
-          <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <input
-              className="border p-2 rounded bg-green-50"
-              placeholder={  fetchedServicedata[0]?.services[index]?.heading ==null? `Heading ${index + 1}` :  fetchedServicedata[0]?.services[index]?.heading}
-              value={services[index].heading    }
-              onChange={(e) =>
-                handleServiceChange(index, "heading", e.target.value)
-              }
-            />
-            <textarea
-              className="border p-2 rounded bg-green-50"
-              placeholder={     fetchedServicedata[0]?.services[index]?.description ==null? `Description ${index + 1}`: fetchedServicedata[0]?.services[index]?.description } 
-              rows={3}
-              value={services[index].description }
-              onChange={(e) =>
-                handleServiceChange(index, "description", e.target.value)
-              }
-            />
-          </div>
-        ))}
-      </section>
-
-      {/* Submit Services Button */}
       <div className="text-center">
         <button
           className="bg-blue-700 text-white px-6 py-3 rounded"
@@ -291,6 +277,20 @@ const AdminPanel = () => {
           Submit Services Data
         </button>
       </div>
+
+      {modalField && (
+        <EditModal
+          title={modalTitle}
+          value={(() => {
+            if (modalField.startsWith("project.")) return data.project[modalIndex][modalField.split(".")[1]];
+            if (modalField.startsWith("services.")) return services[modalIndex][modalField.split(".")[1]];
+            if (modalField.includes("aboutus")) return data.aboutus[modalField.split(".")[1]];
+            return data[modalField];
+          })()}
+          onClose={() => setModalField(null)}
+          onSave={handleSave}
+        />
+      )}
     </div>
   );
 };
