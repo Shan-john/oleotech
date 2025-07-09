@@ -38,7 +38,7 @@ const AdminPanel = () => {
     employeecount: "",
     happyclientcount: "",
     aboutus: { details: "", fulldetail: "" },
-    project: Array(4).fill({ title: "", category: "", image: null }),
+    project: Array(4).fill().map(() => ({ title: "", category: "", image: null })),
   });
   const [services, setServices] = useState(Array(5).fill({ heading: "", description: "" }));
 
@@ -101,7 +101,7 @@ const AdminPanel = () => {
     const projectCopy = data.project.map(({ title, category }) => ({ title, category }));
     formData.append("project", JSON.stringify(projectCopy));
 
-    data.project.forEach((p, i) => {
+    data.project.forEach((p) => {
       if (p.image) {
         formData.append("projectimages", p.image);
       }
@@ -212,19 +212,32 @@ const AdminPanel = () => {
                 {p[field] || `Click to enter ${field}`}
               </div>
             ))}
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files[0];
-                if (file) {
-                  const updated = [...data.project];
-                  updated[i].image = file;
-                  setData((prev) => ({ ...prev, project: updated }));
-                }
-              }}
-              className="bg-green-50 p-2 rounded border"
-            />
+            <div>
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files?.[0] || fetchedBodyData[0].project[i].image  ;
+      const updated = [...data.project];
+      updated[i].image = file;
+      setData((prev) => ({ ...prev, project: updated }));
+    }}
+    className="bg-green-50 p-2 rounded border"
+  />
+  
+  {p.image && (
+    <img
+      src={
+        p.image instanceof File
+          ? URL.createObjectURL(p.image)
+          : p.image
+      }
+      alt={`Preview ${i + 1}`}
+      className="mt-2 w-32 h-32 object-cover rounded border"
+    />
+  )}
+</div>
+
           </div>
         ))}
       </section>
