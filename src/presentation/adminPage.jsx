@@ -8,7 +8,7 @@ const EditModal = ({ title, value, onClose, onSave }) => {
       <div className="bg-white p-6 rounded shadow-md w-96">
         <h2 className="text-lg font-semibold mb-4">{title}</h2>
         <textarea
-          className="border p-2 w-full rounded mb-4"
+          className="border p-2 w-full rounded mb-4 bg-white"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={3}
