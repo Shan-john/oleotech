@@ -96,19 +96,19 @@ const AdminPanel = () => {
   const handleHomepageSubmit = async () => {
     const formData = new FormData();
 
-    formData.append("projectdonecount", data.projectdonecount );
+    formData.append("projectdonecount", data.projectdonecount     );
     formData.append("employeecount", data.employeecount   );
-    formData.append("happyclientcount", data.happyclientcount  );
-    formData.append("aboutus", JSON.stringify(data.aboutus) );
+    formData.append("happyclientcount", data.happyclientcount   );
+    formData.append("aboutus", JSON.stringify(data.aboutus)   );
 
-    const projectWithoutImages = data.project.map((proj) => ({
+    const projectWithoutImages = data.project.map((proj,) => ({
       title: proj.title ,
       category: proj.category,
     }));
-    formData.append("project", JSON.stringify(projectWithoutImages)  );
+    formData.append("project", JSON.stringify(projectWithoutImages)     );
 
-    projectImages.forEach((img) => {
-      if (img) formData.append("projectimages", img);
+    projectImages.forEach((img ) => {
+      if(img)  formData.append("projectimages",   img);
     });
 
     try {
@@ -177,7 +177,7 @@ const AdminPanel = () => {
         />
         <input
           className="border p-3 rounded bg-green-50"
-          placeholder={ fetchedBodyData[0].aboutus.details ==null?"About Us (Short Detail)": fetchedBodyData[0].aboutus.details}
+          placeholder={ fetchedBodyData[0].aboutus.details ==""?"About Us (Short Detail)": fetchedBodyData[0].aboutus.details}
           value={data.aboutus?.details  }
           onChange={(e) =>
             setData({
@@ -212,7 +212,7 @@ const AdminPanel = () => {
           <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <input
               className="border p-2 rounded bg-green-50"
-              placeholder={fetchedBodyData[0].project[index].title ? `Title ${index + 1}` :fetchedBodyData[0].project[index].title}
+              placeholder={fetchedBodyData[0].project[index].title ===null ? `Title ${index + 1}` :fetchedBodyData[0].project[index].title}
               value={data.project[index].title }
               onChange={(e) =>
                 handleProjectChange(index, "title", e.target.value)
@@ -269,7 +269,7 @@ const AdminPanel = () => {
                 handleServiceChange(index, "heading", e.target.value)
               }
             />
-            <textarea
+            <textarea 
               className="border p-2 rounded bg-green-50"
               placeholder={     fetchedServicedata[0]?.services[index]?.description ==null? `Description ${index + 1}`: fetchedServicedata[0]?.services[index]?.description } 
               rows={3}
@@ -281,7 +281,8 @@ const AdminPanel = () => {
           </div>
         ))}
       </section>
-
+       
+ 
       {/* Submit Services Button */}
       <div className="text-center">
         <button
